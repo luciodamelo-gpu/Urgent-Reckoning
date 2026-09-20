@@ -19,7 +19,6 @@ public final class TaczReloadHandler {
     private static Boolean present = null;
     private static boolean wired = false;
     private static boolean wireLogged = false;
-    private static boolean shiftLogged = false;
     private static Method fromLivingEntity = null;
     private static Method getDataHolder = null;
     private static Field reloadStateTypeField = null;
@@ -53,10 +52,6 @@ public final class TaczReloadHandler {
             long ts = reloadTimestampField.getLong(holder);
             long shift = Math.round(net * 0.5);
             reloadTimestampField.setLong(holder, ts - shift);
-            if (log && !shiftLogged) {
-                shiftLogged = true;
-                CardMod.LOGGER.info("CARDMOD tacz reload accelerating x{} for {}", net, player.getName().getString());
-            }
         } catch (Exception ignored) {}
     }
     private static boolean wire() {

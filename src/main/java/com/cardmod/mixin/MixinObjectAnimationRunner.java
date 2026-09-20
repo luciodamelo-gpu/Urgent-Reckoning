@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(targets = "com.tacz.guns.api.client.animation.ObjectAnimationRunner", remap = false)
 public class MixinObjectAnimationRunner {
@@ -23,8 +23,7 @@ public class MixinObjectAnimationRunner {
     private static final ResourceLocation CARDMOD_QUICK_DRAW = new ResourceLocation("cardmod", "quick_draw");
     @Unique
     private static final ResourceLocation CARDMOD_SHARPSHOOTER = new ResourceLocation("cardmod", "sharpshooters_grip");
-
-    @ModifyVariable(method = "updateProgress", at = @At("HEAD"), argsOnly = true, remap = false)
+    @ModifyArg(method = "update", at = @At(value = "INVOKE", target = "Lcom/tacz/guns/api/client/animation/ObjectAnimationRunner;updateProgress(J)V"), remap = false)
     private long cardmod$scaleReloadProgress(long delta) {
         if (animation == null || animation.name == null) return delta;
         String n = animation.name.toLowerCase(Locale.ROOT);

@@ -96,7 +96,6 @@ public final class RespecCommand {
             CardCapability.clearAllCounts(p);
             List<Card> offer = CardRegistry.getRandomOffer(p.getRandom(), 3);
             List<ResourceLocation> ids = offer.stream().map(Card::getId).toList();
-            CardMod.LOGGER.info("CARDMOD respec offer for {}: {}", p.getName().getString(), ids);
             OFFERED.put(p.getUUID(), ids);
             NetworkHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> p), new OpenCardScreenPacket(ids));
         }

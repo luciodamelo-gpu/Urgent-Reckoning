@@ -89,6 +89,7 @@ public final class CardAdminCommand {
         for (ServerPlayer p : players) {
             CardCapability.clearAllCounts(p);
             CardCapability.clearAllModifiers(p);
+            CardCapability.reapply(p);
         }
         src.sendSuccess(() -> Component.literal("Cleared all cards from " + players.size() + " player(s)"), true);
         return players.size();

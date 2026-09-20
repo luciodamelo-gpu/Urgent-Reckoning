@@ -1,6 +1,5 @@
 package com.cardmod.client;
 
-import com.cardmod.CardMod;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Map;
@@ -17,7 +16,6 @@ public final class ClientCardCache {
         COUNTS.clear();
         COUNTS.putAll(counts);
         goodTimingReadyAt = readyAt;
-        CardMod.LOGGER.info("CARDMOD sync received {} cards", counts.size());
     }
 
     public static Map<ResourceLocation, Integer> getCounts() {

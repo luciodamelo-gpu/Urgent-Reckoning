@@ -15,9 +15,7 @@ public final class ClientHandler {
     }
 
     public static void openScreen(List<ResourceLocation> offered) {
-        CardMod.LOGGER.info("CARDMOD openScreen received {} offered ids: {}", offered.size(), offered);
         var cards = offered.stream().map(CardRegistry::get).filter(c -> c != null).toList();
-        CardMod.LOGGER.info("CARDMOD openScreen resolved {} cards", cards.size());
         if (cards.isEmpty()) cards = List.copyOf(CardRegistry.getAll());
         Minecraft.getInstance().setScreen(new CardSelectionScreen(cards));
     }
