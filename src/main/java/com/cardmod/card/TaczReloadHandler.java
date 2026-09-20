@@ -16,6 +16,8 @@ public final class TaczReloadHandler {
     private static final ResourceLocation BRUISED = new ResourceLocation("cardmod", "bruised_hands");
     private static final ResourceLocation QUICK_DRAW = new ResourceLocation("cardmod", "quick_draw");
     private static final ResourceLocation SHARPSHOOTER = new ResourceLocation("cardmod", "sharpshooters_grip");
+    private static final ResourceLocation FAST_FINGERS = new ResourceLocation("cardmod", "fast_fingers");
+    private static final ResourceLocation QUICK_TRIGGER = new ResourceLocation("cardmod", "quick_trigger");
     private static Boolean present = null;
     private static boolean wired = false;
     private static boolean wireLogged = false;
@@ -23,6 +25,7 @@ public final class TaczReloadHandler {
     private static Method getDataHolder = null;
     private static Field reloadStateTypeField = null;
     private static Field reloadTimestampField = null;
+    private static Field shootTimestampField = null;
     private static Method isReloading = null;
     private TaczReloadHandler() {}
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
@@ -33,12 +36,12 @@ public final class TaczReloadHandler {
         int bh = CardCapability.getCount(player, BRUISED);
         int qd = CardCapability.getCount(player, QUICK_DRAW);
         int sg = CardCapability.getCount(player, SHARPSHOOTER);
-        int netPercent = qh*4 - bh*4 + qd*10 + sg*5;
-        int net = netPercent;
+        int ff = CardCapability.getCount(player, FAST_FINGERS);
+        int net = qh * 4 - bh * 4 + qd * 10 + sg * 5 + ff * 5;
         if (net == 0) return;
-        accelerate(player, net, true);
+        accelerate(player, net);
     }
-    public static void accelerate(Player player, int net, boolean log) {
+    public static void accelerate(Player player, int net) {
         if (net == 0) return;
         if (!wire()) {
             if (!wireLogged) { wireLogged = true; CardMod.LOGGER.warn("CARDMOD tacz reload: TACZ API not available"); }
@@ -52,6 +55,11 @@ public final class TaczReloadHandler {
             long ts = reloadTimestampField.getLong(holder);
             long shift = Math.round(net * 0.5);
             reloadTimestampField.setLong(holder, ts - shift);
+            int qt = CardCapability.getCount(player, QUICK_TRIGGER);
+            if (qt > 0) {
+                long sts = shootTimestampField.getLong(holder);
+                shootTimestampField.setLong(holder, sts - Math.round(qt * 2.5));
+            }
         } catch (Exception ignored) {}
     }
     private static boolean wire() {
@@ -66,6 +74,7 @@ public final class TaczReloadHandler {
             Class<?> holderCls = Class.forName("com.tacz.guns.entity.shooter.ShooterDataHolder");
             reloadStateTypeField = holderCls.getField("reloadStateType");
             reloadTimestampField = holderCls.getField("reloadTimestamp");
+            shootTimestampField = holderCls.getField("shootTimestamp");
             Class<?> stateCls = Class.forName("com.tacz.guns.api.entity.ReloadState$StateType");
             isReloading = stateCls.getMethod("isReloading");
         } catch (Exception e) { fromLivingEntity = null; }

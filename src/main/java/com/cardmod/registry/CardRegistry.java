@@ -117,6 +117,28 @@ public final class CardRegistry {
                 mod(apothic("draw_speed"), MULTIPLY_TOTAL, 0.05, "cardmod:sharpshooters_grip_draw"))));
         register(new Card(id("long_reach"), "Long Reach", "+10% unarmed attack range", Rarity.UNCOMMON, List.of(
                 mod(() -> ForgeMod.ENTITY_REACH.get(), MULTIPLY_TOTAL, 0.10, "cardmod:long_reach"))));
+        register(new Card(id("quick_trigger"), "Quick Trigger", "+5% gun fire rate", Rarity.COMMON, List.of()));
+        register(new Card(id("firm_grip"), "Firm Grip", "+5% melee knockback", Rarity.COMMON, List.of(
+                mod(() -> Attributes.ATTACK_KNOCKBACK, ADDITION, 0.05, "cardmod:firm_grip"))));
+        register(new Card(id("steady_aim"), "Steady Aim", "+5% ranged Damage", Rarity.COMMON, List.of(
+                mod(apothic("arrow_damage"), MULTIPLY_TOTAL, 0.05, "cardmod:steady_aim"))));
+        register(new Card(id("light_step"), "Light Step", "+4% movement speed, +1 block Dash distance", Rarity.COMMON, List.of(
+                mod(() -> Attributes.MOVEMENT_SPEED, MULTIPLY_TOTAL, 0.04, "cardmod:light_step"))));
+        register(new Card(id("heavy_swing"), "Heavy Swing", "+5% melee damage, -3% melee attack speed", Rarity.COMMON, List.of(
+                mod(() -> Attributes.ATTACK_DAMAGE, MULTIPLY_TOTAL, 0.05, "cardmod:heavy_swing_dmg"),
+                mod(() -> Attributes.ATTACK_SPEED, MULTIPLY_TOTAL, -0.03, "cardmod:heavy_swing_speed"))));
+        register(new Card(id("fast_fingers"), "Fast Fingers", "+5% reload speed", Rarity.COMMON, List.of(
+                mod(apothic("draw_speed"), MULTIPLY_TOTAL, 0.05, "cardmod:fast_fingers"))));
+        register(new Card(id("thick_soles"), "Thick Soles", "+0.5 block jump height", Rarity.COMMON, List.of()));
+        register(new Card(id("long_stride"), "Long Stride", "+2 blocks Dash distance", Rarity.COMMON, List.of()));
+        register(new Card(id("short_fuse"), "Short Fuse", "-1 sec Dash cooldown", Rarity.COMMON, List.of()));
+        register(new Card(id("hard_head"), "Hard Head", "+1 HP", Rarity.COMMON, List.of(
+                mod(() -> Attributes.MAX_HEALTH, ADDITION, 1.0, "cardmod:hard_head"))));
+        register(new Card(id("soft_landing"), "Soft Landing", "-25% fall damage", Rarity.COMMON, List.of()));
+        register(new Card(id("braced_stance"), "Braced Stance", "+5% knockback resistance", Rarity.COMMON, List.of(
+                mod(() -> Attributes.KNOCKBACK_RESISTANCE, ADDITION, 0.05, "cardmod:braced_stance"))));
+        register(new Card(id("adrenaline"), "Adrenaline", "+5% movement speed below 50% HP", Rarity.COMMON, List.of()));
+        register(new Card(id("clean_hit"), "Clean Hit", "+5% damage against enemies above 75% HP", Rarity.COMMON, List.of()));
     }
 
     public static Card register(Card card) {

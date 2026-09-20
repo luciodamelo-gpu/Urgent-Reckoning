@@ -21,6 +21,7 @@ public final class ClientForgeEvents {
     private static final ResourceLocation BRUISED_ID = new ResourceLocation("cardmod", "bruised_hands");
     private static final ResourceLocation QUICK_DRAW_ID = new ResourceLocation("cardmod", "quick_draw");
     private static final ResourceLocation SHARPSHOOTER_ID = new ResourceLocation("cardmod", "sharpshooters_grip");
+    private static final ResourceLocation FAST_FINGERS_ID = new ResourceLocation("cardmod", "fast_fingers");
 
     private ClientForgeEvents() {}
 
@@ -41,9 +42,10 @@ public final class ClientForgeEvents {
         int bh = ClientCardCache.getCounts().getOrDefault(BRUISED_ID, 0);
         int qd = ClientCardCache.getCounts().getOrDefault(QUICK_DRAW_ID, 0);
         int sg = ClientCardCache.getCounts().getOrDefault(SHARPSHOOTER_ID, 0);
-        int netPercent = qh * 4 - bh * 4 + qd * 10 + sg * 5;
+        int ff = ClientCardCache.getCounts().getOrDefault(FAST_FINGERS_ID, 0);
+        int netPercent = qh * 4 - bh * 4 + qd * 10 + sg * 5 + ff * 5;
         if (netPercent != 0) {
-            TaczReloadHandler.accelerate(mc.player, netPercent, false);
+            TaczReloadHandler.accelerate(mc.player, netPercent);
         }
         if (wantTacz) {
             if (!taczActive || ticks % 10 == 0) {

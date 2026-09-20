@@ -184,6 +184,16 @@ public class CardSelectionScreen extends Screen {
             case "kick":
                 desc = struck(card.getDescription());
                 break;
+            case "light_step":
+                desc = Component.literal("+4% movement speed, ")
+                        .append(struck("+1 block Dash distance"));
+                break;
+            case "long_stride":
+                desc = struck(card.getDescription());
+                break;
+            case "short_fuse":
+                desc = struck(card.getDescription());
+                break;
             case "sad_step":
                 desc = Component.literal("increase ")
                         .append(struck("dash distance by 1 block"))

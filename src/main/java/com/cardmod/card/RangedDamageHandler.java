@@ -30,16 +30,19 @@ public final class RangedDamageHandler {
         ResourceLocation ke = new ResourceLocation("cardmod","keen_eyes");
         ResourceLocation cs = new ResourceLocation("cardmod","chainsmoker");
         ResourceLocation bh = new ResourceLocation("cardmod","bruised_hands");
+        ResourceLocation sa = new ResourceLocation("cardmod","steady_aim");
         ResourceLocation he = new ResourceLocation("cardmod","hunters_eye");
         int lfCount = CardCapability.getCount(player, lf);
         int keCount = CardCapability.getCount(player, ke);
         int csCount = CardCapability.getCount(player, cs);
         int bhCount = CardCapability.getCount(player, bh);
+        int saCount = CardCapability.getCount(player, sa);
         int heCount = CardCapability.getCount(player, he);
         if (lfCount > 0) bonus += 0.04f * lfCount;
         if (keCount > 0) bonus += 0.10f * keCount;
         if (csCount > 0) bonus += 0.50f * csCount;
         if (bhCount > 0) bonus += 0.06f * bhCount;
+        if (saCount > 0) bonus += 0.05f * saCount;
         if (heCount > 0) bonus += 0.08f * heCount;
         if (bonus == 0) {
             ResourceLocation sel = CardCapability.getSelected(player);
