@@ -113,7 +113,8 @@ public final class CardRegistry {
         register(new Card(id("fleet_hands"), "Fleet Hands", "+10% melee attack speed, -5% melee damage", Rarity.UNCOMMON, List.of(
                 mod(() -> Attributes.ATTACK_SPEED, MULTIPLY_TOTAL, 0.10, "cardmod:fleet_hands_speed"),
                 mod(() -> Attributes.ATTACK_DAMAGE, MULTIPLY_TOTAL, -0.05, "cardmod:fleet_hands_dmg"))));
-        register(new Card(id("sharpshooters_grip"), "Sharpshooter's Grip", "+5% reload speed", Rarity.UNCOMMON, List.of(
+        register(new Card(id("sharpshooters_grip"), "Sharpshooter's Grip", "+10% ranged damage, +5% reload speed", Rarity.UNCOMMON, List.of(
+                mod(apothic("arrow_damage"), MULTIPLY_TOTAL, 0.10, "cardmod:sharpshooters_grip_dmg"),
                 mod(apothic("draw_speed"), MULTIPLY_TOTAL, 0.05, "cardmod:sharpshooters_grip_draw"))));
         register(new Card(id("long_reach"), "Long Reach", "+10% unarmed attack range", Rarity.UNCOMMON, List.of(
                 mod(() -> ForgeMod.ENTITY_REACH.get(), MULTIPLY_TOTAL, 0.10, "cardmod:long_reach"))));
@@ -139,6 +140,27 @@ public final class CardRegistry {
                 mod(() -> Attributes.KNOCKBACK_RESISTANCE, ADDITION, 0.05, "cardmod:braced_stance"))));
         register(new Card(id("adrenaline"), "Adrenaline", "+5% movement speed below 50% HP", Rarity.COMMON, List.of()));
         register(new Card(id("clean_hit"), "Clean Hit", "+5% damage against enemies above 75% HP", Rarity.COMMON, List.of()));
+        register(new Card(id("desperation"), "Desperation", "+5% damage below 25% HP", Rarity.COMMON, List.of()));
+        register(new Card(id("unmoving"), "Unmoving", "+15% defense while crouching", Rarity.RARE, List.of()));
+        register(new Card(id("bloodied"), "Bloodied", "+15% damage below 25% HP", Rarity.RARE, List.of()));
+        register(new Card(id("predator"), "Predator", "+10% damage against enemies below 50% HP, +5% movement speed", Rarity.RARE, List.of(
+                mod(() -> Attributes.MOVEMENT_SPEED, MULTIPLY_TOTAL, 0.05, "cardmod:predator_speed"))));
+        register(new Card(id("caffeinated_blood"), "Caffeinated Blood",
+                "Increase movement speed by 10% and dash cool down by 5%", Rarity.RARE, List.of(
+                mod(() -> Attributes.MOVEMENT_SPEED, MULTIPLY_TOTAL, 0.10, "cardmod:caffeinated_blood"))));
+        register(new Card(id("berserkers_pulse"), "Berserker's Pulse", "+15% damage below 50% HP", Rarity.RARE, List.of()));
+        register(new Card(id("iron_frame"), "Iron Frame", "+10 HP, -5% movement speed", Rarity.RARE, List.of(
+                mod(() -> Attributes.MAX_HEALTH, ADDITION, 10.0, "cardmod:iron_frame_health"),
+                mod(() -> Attributes.MOVEMENT_SPEED, MULTIPLY_TOTAL, -0.05, "cardmod:iron_frame_speed"))));
+        register(new Card(id("glass_cannon"), "Glass Cannon", "+15% damage, -5% defense", Rarity.RARE, List.of()));
+        register(new Card(id("deadeye"), "Deadeye", "+15% ranged damage, -5% movement speed", Rarity.RARE, List.of(
+                mod(apothic("arrow_damage"), MULTIPLY_TOTAL, 0.15, "cardmod:deadeye_dmg"),
+                mod(() -> Attributes.MOVEMENT_SPEED, MULTIPLY_TOTAL, -0.05, "cardmod:deadeye_speed"))));
+        register(new Card(id("relentless"), "Relentless", "+10% melee damage, +10% melee attack speed", Rarity.RARE, List.of(
+                mod(() -> Attributes.ATTACK_DAMAGE, MULTIPLY_TOTAL, 0.10, "cardmod:relentless_dmg"),
+                mod(() -> Attributes.ATTACK_SPEED, MULTIPLY_TOTAL, 0.10, "cardmod:relentless_speed"))));
+        register(new Card(id("fleetfoot"), "Fleetfoot", "+15% movement speed, +5 blocks Dash distance", Rarity.RARE, List.of(
+                mod(() -> Attributes.MOVEMENT_SPEED, MULTIPLY_TOTAL, 0.15, "cardmod:fleetfoot"))));
     }
 
     public static Card register(Card card) {

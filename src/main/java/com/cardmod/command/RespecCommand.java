@@ -1,6 +1,5 @@
 package com.cardmod.command;
 
-import com.cardmod.CardMod;
 import com.cardmod.capability.CardCapability;
 import com.cardmod.card.Card;
 import com.cardmod.card.Rarity;

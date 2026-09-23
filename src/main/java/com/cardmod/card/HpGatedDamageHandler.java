@@ -2,35 +2,34 @@ package com.cardmod.card;
 
 import com.cardmod.capability.CardCapability;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.List;
 
-public final class CleanHitHandler {
-    private record Gate(ResourceLocation id, float threshold, float rate, boolean below) {
+public final class HpGatedDamageHandler {
+    private record Gate(ResourceLocation id, float threshold, float rate) {
     }
 
     private static final List<Gate> GATES = List.of(
-            new Gate(new ResourceLocation("cardmod", "clean_hit"), 0.75f, 0.05f, false),
-            new Gate(new ResourceLocation("cardmod", "predator"), 0.50f, 0.10f, true));
+            new Gate(new ResourceLocation("cardmod", "desperation"), 0.25f, 0.05f),
+            new Gate(new ResourceLocation("cardmod", "bloodied"), 0.25f, 0.15f),
+            new Gate(new ResourceLocation("cardmod", "berserkers_pulse"), 0.50f, 0.15f));
 
-    private CleanHitHandler() {
+    private HpGatedDamageHandler() {
     }
 
     public static void onHurt(LivingHurtEvent event) {
         if (event.isCanceled()) return;
         Player player = DamageHelper.playerAttacker(event.getSource());
         if (player == null) return;
-        LivingEntity victim = event.getEntity();
-        float frac = victim.getHealth() / victim.getMaxHealth();
         float bonus = 0f;
         for (Gate gate : GATES) {
             int count = CardCapability.getCount(player, gate.id());
             if (count <= 0) continue;
-            boolean hit = gate.below() ? frac < gate.threshold() : frac >= gate.threshold();
-            if (hit) bonus += gate.rate() * count;
+            if (player.getHealth() < player.getMaxHealth() * gate.threshold()) {
+                bonus += gate.rate() * count;
+            }
         }
         if (bonus != 0f) event.setAmount(event.getAmount() * (1f + bonus));
     }

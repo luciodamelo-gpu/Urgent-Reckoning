@@ -194,6 +194,13 @@ public class CardSelectionScreen extends Screen {
             case "short_fuse":
                 desc = struck(card.getDescription());
                 break;
+            case "fleetfoot":
+                desc = Component.literal("+15% movement speed, ").append(struck("+5 blocks Dash distance"));
+                break;
+            case "caffeinated_blood":
+                desc = Component.literal("Increase movement speed by 10% and ")
+                        .append(struck("dash cool down by 5%"));
+                break;
             case "sad_step":
                 desc = Component.literal("increase ")
                         .append(struck("dash distance by 1 block"))

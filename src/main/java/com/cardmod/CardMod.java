@@ -7,6 +7,8 @@ import com.cardmod.card.RangedDamageHandler;
 import com.cardmod.card.AdrenalineHandler;
 import com.cardmod.card.BloodRushHandler;
 import com.cardmod.card.CleanHitHandler;
+import com.cardmod.card.GlassCannonHandler;
+import com.cardmod.card.HpGatedDamageHandler;
 import com.cardmod.card.SoftLandingHandler;
 import com.cardmod.card.ShieldStunHandler;
 import com.cardmod.card.SpringyTendonsHandler;
@@ -43,6 +45,8 @@ public class CardMod {
         MinecraftForge.EVENT_BUS.addListener(SoftLandingHandler::onHurt);
         MinecraftForge.EVENT_BUS.addListener(AdrenalineHandler::onTick);
         MinecraftForge.EVENT_BUS.addListener(CleanHitHandler::onHurt);
+        MinecraftForge.EVENT_BUS.addListener(HpGatedDamageHandler::onHurt);
+        MinecraftForge.EVENT_BUS.addListener(GlassCannonHandler::onHurt);
         MinecraftForge.EVENT_BUS.addListener(TaczReloadHandler::onPlayerTick);
         MinecraftForge.EVENT_BUS.addListener(net.minecraftforge.eventbus.api.EventPriority.LOWEST, false, ShieldStunHandler::onDamage);
         MinecraftForge.EVENT_BUS.addListener(RespecCommand::register);
